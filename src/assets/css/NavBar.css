@@ -1,0 +1,20 @@
+.navcoffee {
+    background-color: bisque;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px 0;
+    font-size: larger;
+    gap: 20px;
+}
+
+.navcoffee a {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navcoffee a:hover {
+    text-decoration: underline;
+}
