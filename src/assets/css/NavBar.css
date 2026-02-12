@@ -1,20 +1,36 @@
 .navcoffee {
-    background-color: bisque;
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    padding: 20px 0;
-    font-size: larger;
-    gap: 20px;
+    justify-content: space-between;
+    padding: 12px 16px;
+    gap: 16px;
+    background: #111;
+    color: white;
+}
+
+.brand__logo {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+}
+
+.navcoffee__links {
+    display: flex;
+    gap: 16px;
 }
 
 .navcoffee a {
-    color: rgb(0, 0, 0);
-    font-weight: bold;
+    color: #fff;
     text-decoration: none;
-    cursor: pointer;
 }
 
-.navcoffee a:hover {
+.is-active {
     text-decoration: underline;
+}
+
+.local {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
