@@ -1,0 +1,19 @@
+.checkout-page {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.checkout-card {
+    background: #ffffff;
+    margin-top: 10px;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #3A3A3A;
+}
+
+.checkout-btn {
+    width: auto;
+    min-width: 100px;
+    padding: 6px 18px;
+    border-radius: 8px;
+}

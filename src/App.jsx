@@ -1,53 +1,57 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
-import NavBar from './components/Navbar'
+import { CartProvider } from './context/CartContext.jsx'
+import NavBar from './components/NavBar'
+import Cart from './components/Cart'
+import Checkout from './components/Checkout'
 import ItemListContainer from './containers/ItemListContainer'
 import ItemDetailContainer from './containers/ItemDetailContainer'
 import Local from './pages/Local'
 import NotFound from './components/NotFound'
 
 function App() {
-  const [cartCount, setCartCount] = useState(0)
-
-  const handleAddToCart = (qty = 1) => {
-    setCartCount((prev) => prev + qty)
-  }
-
   return (
-    <BrowserRouter>
-      <NavBar cartCount={cartCount} />
+    <CartProvider>
+      <BrowserRouter>
+        <NavBar />
 
-      <Routes>
-        {/* HOME - Catálogo completo */}
-        <Route
-          path="/"
-          element={<ItemListContainer greeting="Bienvenidos a Tempo Coffee" />}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={<ItemListContainer greeting="Bienvenidos a Tempo Coffee" />}
+          />
 
-        {/* Catálogo por categoría (ruta dinámica) */}
-        <Route
-          path="/category/:categoryId"
-          element={<ItemListContainer greeting="Explorá la categoría" />}
-        />
+          <Route
+            path="/category/:categoryId"
+            element={<ItemListContainer greeting="Explorá la categoría" />}
+          />
 
-        {/* Detalle por ID (ruta dinámica) */}
-        <Route
-          path="/item/:itemId"
-          element={<ItemDetailContainer onAddToCart={handleAddToCart} />}
-        />
+          <Route
+            path="/item/:itemId"
+            element={<ItemDetailContainer />}
+          />
 
-        <Route 
-          path="/local" 
-          element={<Local />} 
-        />
+          <Route
+            path="/cart"
+            element={<Cart />}
+          />
 
-        {/* 404 */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/checkout"
+            element={<Checkout />}
+          />
+          
+          <Route
+            path="/local"
+            element={<Local />}
+          />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
   )
 }
 

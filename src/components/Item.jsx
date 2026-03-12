@@ -13,7 +13,7 @@ const Item = ({ product }) => {
                 <h5 className="card-title mt-1">{title}</h5>
                 <p className="card-text">${price}</p>
 
-                <Link className="btn btn-outline-primary" to={`/item/${id}`}>
+                <Link className="btn btn-dark checkout-btn" to={`/item/${id}`}>
                     Ver detalle
                 </Link>
             </div>

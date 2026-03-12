@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProducts } from '../services/productService'
 import ItemList from '../components/ItemList'
@@ -12,34 +12,26 @@ const ItemListContainer = ({ greeting }) => {
     const [errorMsg, setErrorMsg] = useState('')
 
     useEffect(() => {
-        let alive = true
-
         setLoading(true)
         setErrorMsg('')
 
         getProducts()
             .then((data) => {
-                if (!alive) return
-                setProducts(data)
+                if (categoryId) {
+                    const filteredProducts = data.filter((p) => p.category === categoryId)
+                    setProducts(filteredProducts)
+                } else {
+                    setProducts(data)
+                }
             })
             .catch(() => {
-                if (!alive) return
                 setErrorMsg('Ocurrió un error cargando productos.')
+                setProducts([])
             })
             .finally(() => {
-                if (!alive) return
                 setLoading(false)
             })
-
-        return () => {
-            alive = false
-        }
-    }, [])
-
-    const filtered = useMemo(() => {
-        if (!categoryId) return products
-        return products.filter((p) => p.category === categoryId)
-    }, [products, categoryId])
+    }, [categoryId])
 
     return (
         <section className="ilc">
@@ -48,11 +40,11 @@ const ItemListContainer = ({ greeting }) => {
             {loading && <p>Cargando productos...</p>}
             {!loading && errorMsg && <p>{errorMsg}</p>}
 
-            {!loading && !errorMsg && categoryId && filtered.length === 0 && (
+            {!loading && !errorMsg && categoryId && products.length === 0 && (
                 <p>No hay productos para la categoría: "{categoryId}".</p>
             )}
 
-            {!loading && !errorMsg && <ItemList products={filtered} />}
+            {!loading && !errorMsg && <ItemList products={products} />}
         </section>
     )
 }

@@ -1,23 +1,36 @@
-import { useState } from "react"
+import { useState } from 'react'
 
-export default function ItemCount({ stock = 0, initial = 1 }) {
-    const [count, setCount] = useState(initial)
+const clamp = (n, min, max) => Math.max(min, Math.min(max, n))
 
-    const increment = () => {
-        if (count < stock) setCount(count + 1)
-    }
+const ItemCount = ({ stock = 0, initial = 1, onAdd }) => {
+    const safeInitial = clamp(initial, 1, Math.max(stock, 1))
+    const [qty, setQty] = useState(safeInitial)
 
-    const decrement = () => {
-        if (count > 1) setCount(count - 1)
+    const inc = () => setQty((q) => clamp(q + 1, 1, stock))
+    const dec = () => setQty((q) => clamp(q - 1, 1, stock))
+
+    const handleAdd = () => {
+        if (stock <= 0) return
+        if (typeof onAdd === 'function') onAdd(qty)
     }
 
     return (
-        <div>
-            <button onClick={decrement}>-</button>
-            <span> {count} </span>
-            <button onClick={increment}>+</button>
+        <div className="detail__count">
+            <button className="btn btn-outline-secondary" onClick={dec} disabled={qty <= 1}>
+                -
+            </button>
 
-            <button disabled={stock === 0}>Agregar al carrito</button>
+            <span style={{ minWidth: 32, textAlign: 'center' }}>{qty}</span>
+
+            <button className="btn btn-outline-secondary" onClick={inc} disabled={qty >= stock}>
+                +
+            </button>
+
+            <button className="btn btn-dark checkout-btn" onClick={handleAdd} disabled={stock <= 0}>
+                Agregar
+            </button>
         </div>
     )
 }
+
+export default ItemCount

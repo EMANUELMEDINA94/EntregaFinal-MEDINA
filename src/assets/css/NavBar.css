@@ -2,12 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 16px;
+    padding: 10px 20px;
     gap: 16px;
-    background: #111;
-    color: white;
+    background: #9c6a3fe2;
+    color: #F1F1F1;
+    border-bottom: 1px solid #3A3A3A;
 }
-
 .brand__logo {
     height: 40px;
     width: 40px;
@@ -16,16 +16,25 @@
 
 .navcoffee__links {
     display: flex;
-    gap: 16px;
+    gap: 20px;
+    align-items: center;
 }
 
 .navcoffee a {
-    color: #fff;
+    color: #000000;
+    font-weight: bold;
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navcoffee a:hover {
+    color: #000000;
 }
 
 .is-active {
-    text-decoration: underline;
+    color: #9C6B3F;
+    border-bottom: 1px solid #9C6B3F;
+    padding-bottom: 2px;
 }
 
 .local {

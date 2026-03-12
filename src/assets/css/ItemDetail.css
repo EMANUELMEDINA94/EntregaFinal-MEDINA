@@ -1,9 +1,9 @@
 .detail__img {
     width: 100%;
-    max-height: 420px;
     object-fit: contain;
-    border-radius: 8px;
-    background: #f7f7f7;
+    border-radius: 10px;
+    background: #202020;
+    padding: 2px;
 }
 
 .detail__count {
